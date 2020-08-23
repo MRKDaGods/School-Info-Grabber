@@ -1,4 +1,30 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2020, Mohamed Ammar <mamar452@gmail.com>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,54 +52,54 @@ namespace MRK {
         const double HYPOTHETICAL_MEMORY = 300d; //300mb per WB
         const double MAX_MEMORY = 1500d; //i will just alloc for 1500MB for the browsers!
         const string FLEX = "fgh8743hg8g44frn3c94jc3mxmfmeniubierbfinnSSMAMMARMRK";
-        const string HAPPY = "chillthisisnottherealkeyofhappinesslol";
+        const string HAPPY = "fubf83b8fcnMRKRKrNb8fbcr8xnnhfBbrueBneijnriunccine";
 
         static string[] ms_Roles = new string[] {
-            GetRealString(@"~yql}^Oj"),
-            GetRealString(@"F^g|}@Jsy[IFHLOl}CrCGHL"),
-            GetRealString(@"F^g|}@Jsy[IFHLOl}CrCGHB\L~yql}^Oj"),
-            GetRealString(@"FLHFXqsf")
+            "Student",
+            "Non-editing teacher",
+            "Non-editing teacher, Student",
+            "No roles"
         };
         static string[] ms_Subjects = new string[] {
-            GetRealString(@"\L|mJj"),
-            GetRealString(@"\LzFG]IlENz"),
-            GetRealString(@"\LzCGI|GQOca"),
-            GetRealString(@"y}RI|m^"),
-            GetRealString(@"zE}QJ|GHf"),
-            GetRealString(@"yEaGIFeD"),
-            GetRealString(@"~AJ|XIO"),
-            GetRealString(@"~cerC]IlENz"),
-            GetRealString(@"xc}_r|LzFG]IlENz"),
-            GetRealString(@"SzJcGQJ|eQ"),
-            GetRealString(@"Clbn}j"),
-            GetRealString(@"y|e]IF_J|eQ"),
-            GetRealString(@"lGqsaCOc}Rqz"),
-            GetRealString(@"z|eAI}^OlG^q\"),
-            GetRealString(@"zf"),
-            GetRealString(@"y~yrbnCOlL"),
-            GetRealString(@"zbLzCGI|GQOca"),
-            GetRealString(@"z}fLzCGI|GQOca"),
-            GetRealString(@"zbL~lCHGAH\"),
-            GetRealString(@"z}fL~lCHGAH\"),
-            GetRealString(@"zbLzFG]IlENz"),
-            GetRealString(@"z}fLzFG]IlENz"),
-            GetRealString(@"zbL|mJj"),
-            GetRealString(@"zsaCrFGAbn}@qsCAq|\"),
-            GetRealString(@"z}fL|mJj"),
-            GetRealString(@"x~e~"),
-            GetRealString(@"}ca[r|\LysCCIz"),
-            GetRealString(@"y|EIlGQJhiCHRiCbceGr^qhiXr|EO|mEqxj\d@Qbneayz"),
-            GetRealString(@"~lCHGAHRj\dHR"),
-            GetRealString(@"|mJhimqcCAq|\Lenifz"),
-            GetRealString(@"zFG]IlENxj\dH\"),
-            GetRealString(@"zCGI|GQOcabojeQn"),
-            GetRealString(@"zFG]IlENxi~~FGCIhjS"),
-            GetRealString(@"Ol}QOne]OsaQqz")
+            "OL Math",
+            "OL Biology",
+            "OL Chemistry",
+            "German",
+            "Business",
+            "French",
+            "Sociology",
+            "Psychology",
+            "Human Biology",
+            "OLPhysics",
+            "OXF ESL",
+            "Economics",
+            "Literature",
+            "Accounting",
+            "CS",
+            "EDX Math",
+            "A2 Chemistry",
+            "AS Chemistry",
+            "A2 Physics",
+            "AS Physics",
+            "A2 Biology",
+            "AS Biology",
+            "A2 Math",
+            "Arabic Edexcel",
+            "AS Math",
+            "ICT",
+            "Trial Exam",
+            "English as a second language 0993 CIE",
+            "Physics 0972",
+            "Math Edxcel 4MA1",
+            "Biology 0970",
+            "Chemistry 0971",
+            "Biology TRial 1",
+            "testCourse"
         };
 
         DocLoaded m_NextEvent;
         WebBrowser m_Browser;
-        BrowserDebugger m_Debugger; //for debug
+        BrowserDebugger m_Debugger;
         List<UserInfo> m_Users;
         Dictionary<string, WebBrowser> m_MBrowsers;
         int m_CompleteUsers;
@@ -91,7 +117,7 @@ namespace MRK {
             bt.Click += OnClick;
             //m_Debugger = new BrowserDebugger();
             //m_Debugger.Show();
-            m_Browser = new WebBrowser(); //m_Debugger.browser1;
+            m_Browser = new WebBrowser();
             m_Browser.ScriptErrorsSuppressed = true;
             m_Browser.DocumentCompleted += OnDocLoaded;
 
@@ -163,10 +189,12 @@ namespace MRK {
         }
 
         string LocalToProxyHref(string href) {
-            int idxX = href.IndexOf(GetRealString(@"J|z")) + 3;
-            int edxX = href.LastIndexOf(GetRealString(@"aFm_HoX"));
-            return GetRealString(@"JcyHcfgRCIcf^J|H^r|eCql}_NxH}RgiRIq[Il~^HlC\{G@{z") 
-                + href.Substring(idxX, edxX - idxX);
+            //https://als.ig.academy/user/view.php?id=660&amp;course=16
+            //https://als.ig.academy/user/profile.php?id=660
+
+            int idxX = href.IndexOf("id=") + 3;
+            int edxX = href.LastIndexOf("&amp;");
+            return $"https://als.ig.academy/user/profile.php?id={href.Substring(idxX, edxX - idxX)}";
         }
 
         void OnMDocLoaded(object o, WebBrowserDocumentCompletedEventArgs e) {
@@ -187,12 +215,12 @@ namespace MRK {
                              where LocalToProxyHref(u.Href) == callingHref
                              select u).Single();
 
-            HtmlElement element = GetElementWithClass(GetRealString(@"OseGHEiRIq[Il~"), caller);
+            HtmlElement element = GetElementWithClass("userprofile", caller);
             string ih = element.InnerHtml;
 
-            int x = ih.IndexOf(GetRealString(@"rxiDHF}F{xa_r|GXOl")) + 15;
-            int y = ih.Substring(x).IndexOf(GetRealString(@"bA")) + 2 + x;
-            int z = ih.Substring(y).IndexOf(GetRealString(@"{hC{L")) + y;
+            int x = ih.IndexOf("a href=\"mailto:") + 15;
+            int y = ih.Substring(x).IndexOf("\">") + 2 + x;
+            int z = ih.Substring(y).IndexOf("</a>") + y;
 
             user.Email = ih.Substring(y, z - y);
 
@@ -216,7 +244,7 @@ namespace MRK {
                 StartWorker(m_CurrentWorker);
             }
 
-            SetStatus($"Virtualizing {m_CurrentWorker}:{m_CompleteUsers} - {(int)((float)m_CompleteUsers / m_Users.Count * 100f)}%");
+            SetStatus($"Virtualizing member {m_CurrentWorker}:{m_CompleteUsers} - {(int)((float)m_CompleteUsers / m_Users.Count * 100f)}%");
 
             if (m_CompleteUsers == m_Users.Count) {
                 //complete!
@@ -262,7 +290,7 @@ namespace MRK {
             }
         }
 
-        static string GetRealString(string str) {
+        string GetRealString(string str) {
             string newStr = "";
 
             for (int i = 0; i < str.Length; i++) {
@@ -293,46 +321,46 @@ namespace MRK {
 
         void OnClick(object sender, EventArgs e) {
             SetStatus("Initiating");
-            m_Browser.Navigate(GetRealString(@"JcyHcfgRCIcf^J|H^r|eCql}_NxXIO[IB[IFyGNh\Jcj"));
+            m_Browser.Navigate(GetRealString(@"JcyHcfgRCIcf^J|H^r|eCql}_NxXIO[IB[IFyGNh\Jcj")); //https://als.ig.academy/login/index.php
             HtmlElement element = null;
 
             m_NextEvent = (x, x1) => {
-                element = GetElementWithId(GetRealString(@"OseGHFCI|~"));
+                element = GetElementWithId("username");
                 SetElementValue(element, m_Config.Username);
 
-                element = GetElementWithId(GetRealString(@"HlmQHO]HFz"));
+                element = GetElementWithId("password");
                 SetElementValue(element, m_Config.Password);
 
-                element = GetElementWithId(GetRealString(@"IlEJ|BOl"));
-                element.InvokeMember(GetRealString(@"rS[rX"));
+                element = GetElementWithId("loginbtn");
+                element.InvokeMember("click");
 
                 m_NextEvent = (x2, x3) => {
-                    if (x3.Url.OriginalString != GetRealString(@"JcyHcfgRCIcf^J|H^r|eCql}_Nx_Nx"))
+                    if (x3.Url.OriginalString != GetRealString("JcyHcfgRCIcf^J|H^r|eCql}_Nx_Nx")) //https://als.ig.academy/my/
                         return;
 
                     m_Browser.Navigate(string.Format(GetRealString(
-                        @"JcyHcfgRCIcf^J|H^r|eCql}_NxH}RgG^ql}gEiDHoAIqsCJ|zfzaFG@{naEiGHEiCq~NQiaEy[qFGRHz"),
-                        m_Config.Threshold));
+                        "JcyHcfgRCIcf^J|H^r|eCql}_NxH}RgG^ql}gEiDHoAIqsCJ|zfzaFG@{naEiGHEiCq~NQiaEy[qFGRHz"),
+                        m_Config.Threshold)); //https://als.ig.academy/user/index.php?contextid=144&id=16&perpage={0}&tifirst
 
                     m_NextEvent = (x4, x5) => {
                         int index = 0;
                         m_Users = new List<UserInfo>();
 
                         while (true) {
-                            element = GetElementWithId(GetRealString(@"OseGHB[IFyGNh\rsaJ|e[Hlm^Ocf_fqMHL") + index);
+                            element = GetElementWithId($"user-index-participants-16_r{index}");
 
                             if (element == null)
                                 break;
 
                             string clz;
-                            if ((clz = element.GetAttribute("className")) != null && clz == GetRealString(@"q|\OcGRIH"))
+                            if ((clz = element.GetAttribute("className")) != null && clz == "emptyrow")
                                 break;
 
                             string ih = element.InnerHtml;
                             string it = element.InnerText;
 
-                            int y = ih.IndexOf(GetRealString(@"JcaGqAB")) + 6;
-                            int z = ih.IndexOf(GetRealString(@"aFm_Ho_AI}RH~frB{L")) + 14;
+                            int y = ih.IndexOf("href=\"") + 6;
+                            int z = ih.IndexOf("&amp;course=16\">") + 14;
 
                             string href = ih.Substring(y, z - y);
                             int nIdx;
@@ -388,8 +416,8 @@ namespace MRK {
 
                             if (idx >= m_RealBrowsers.Length)
                                 idx = 0;
-                        }         
-                        
+                        }
+
                         string[] keyBuf = m_MBrowsers.Keys.ToArray();
                         WebBrowser[] wbBuf = m_MBrowsers.Values.ToArray();
 
